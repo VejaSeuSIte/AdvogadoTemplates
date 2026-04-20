@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Henrique Vasconcelos — Advocacia Criminal e Consultiva · Rio de Janeiro · OAB/RJ 165.233</title>
+<meta name="description" content="Henrique Vasconcelos — advogado criminalista e consultor em direito penal empresarial. Rio de Janeiro. Atendimento por indicação, defesa estratégica em primeira e segunda instância, STF e STJ." />
+<meta name="theme-color" content="#fcfbf8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fcfbf8;
+    --paper-2:#f6f3ec;
+    --stone:#d9d4c7;
+    --line:#e7e1d2;
+    --line-2:#d0c9b5;
+    --ink:#0b0b0c;
+    --ink-soft:#1c1d1c;
+    --gray:#4a4944;
+    --muted:#817b6d;
+    --dim:#aea796;
+    --green:#1f3a2f;
+    --green-d:#16291f;
+    --accent:#8b5a2b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-weight:400}
+  ::selection{background:var(--green);color:var(--paper)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .serif{font-family:'EB Garamond',serif}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 48px}
+  .wrap-tight{max-width:780px;margin:0 auto;padding:0 48px}
+  @media(max-width:680px){.wrap,.wrap-tight{padding:0 24px}}
+
+  /* NAV */
+  .nav{padding:28px 0;position:relative;z-index:10}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:0 48px;display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+  .brand{display:flex;align-items:baseline;gap:16px}
+  .brand-name{font-family:'EB Garamond',serif;font-size:20px;font-weight:500;letter-spacing:.01em}
+  .brand-oab{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .nav-links{display:flex;gap:40px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .nav-links a{position:relative;transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.current{color:var(--ink)}
+  @media(max-width:880px){.nav-links{display:none}.nav-inner{padding:0 24px}.brand-oab{display:none}}
+
+  /* HERO */
+  .hero{padding:96px 0 160px;position:relative}
+  .hero-eye{margin-bottom:56px}
+  .hero-eye-row{display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;align-items:center}
+  .hero-eye-row::before{content:"";width:40px;height:1px;background:var(--muted)}
+  .hero h1{font-family:'EB Garamond',serif;font-weight:400;font-size:clamp(64px,10vw,140px);line-height:.92;letter-spacing:-.03em;margin-bottom:48px;color:var(--ink)}
+  .hero h1 em{font-style:italic;font-weight:500}
+  .hero-tagline{font-family:'EB Garamond',serif;font-size:clamp(22px,2.6vw,32px);font-style:italic;color:var(--gray);max-width:28ch;line-height:1.35;margin-bottom:88px;font-weight:400}
+  .hero-foot{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;border-top:1px solid var(--line);padding-top:32px}
+  .hero-foot-meta{display:flex;gap:48px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .hero-foot-meta strong{display:block;color:var(--ink);font-weight:500;margin-bottom:4px;font-size:13px;letter-spacing:0;font-family:'Inter',sans-serif;text-transform:none}
+  .hero-cta{font-family:'EB Garamond',serif;font-size:22px;font-style:italic;color:var(--ink);display:inline-flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:4px;transition:gap .25s,color .25s}
+  .hero-cta:hover{gap:20px;color:var(--accent);border-color:var(--accent)}
+  .hero-cta svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+  @media(max-width:680px){.hero{padding:48px 0 88px}.hero-foot{grid-template-columns:1fr;gap:24px;align-items:start}.hero-foot-meta{gap:32px;flex-wrap:wrap}}
+
+  /* SECTION BASE */
+  .section{padding:128px 0;position:relative}
+  .section.wide{padding:144px 0}
+  .section.dark{background:var(--green);color:var(--paper)}
+  .section.dark .mono{color:rgba(255,255,255,.6)}
+  .section.dark .rule{background:rgba(255,255,255,.2)}
+  .section.paper-2{background:var(--paper-2)}
+
+  .section-head{display:grid;grid-template-columns:200px 1fr;gap:64px;margin-bottom:88px;align-items:start}
+  .section-head-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;padding-top:12px;border-top:1px solid var(--line)}
+  .section.dark .section-head-label{color:rgba(255,255,255,.5);border-top-color:rgba(255,255,255,.2)}
+  .section-head h2{font-family:'EB Garamond',serif;font-weight:400;font-size:clamp(38px,5.5vw,68px);line-height:1.04;letter-spacing:-.025em;color:var(--ink);max-width:20ch}
+  .section.dark .section-head h2{color:var(--paper)}
+  .section-head h2 em{font-style:italic;font-weight:500}
+  @media(max-width:880px){.section{padding:88px 0}.section-head{grid-template-columns:1fr;gap:20px;margin-bottom:56px}}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:200px 1fr;gap:64px;align-items:start}
+  .about-monogram{aspect-ratio:3/4;background:var(--paper-2);border:1px solid var(--line);border-radius:2px;display:grid;place-items:center;position:sticky;top:32px;position:relative;overflow:hidden}
+  .about-monogram::before{content:"HV";position:absolute;font-family:'EB Garamond',serif;font-size:88px;font-style:italic;color:var(--stone);line-height:1;letter-spacing:-.04em}
+  .about-monogram::after{content:"";position:absolute;bottom:24px;left:24px;right:24px;padding-top:16px;border-top:1px solid var(--line-2);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;content:"Est. 2008 · RJ"}
+  .about-body{font-size:18px;line-height:1.85;color:var(--ink-soft);max-width:58ch}
+  .about-body p{margin-bottom:28px}
+  .about-body p:first-child{font-family:'EB Garamond',serif;font-size:26px;line-height:1.5;font-style:italic;color:var(--ink);margin-bottom:36px}
+  .about-body a{color:var(--accent);border-bottom:1px solid var(--accent);transition:color .2s,border-color .2s}
+  .about-body a:hover{color:var(--ink);border-color:var(--ink)}
+  @media(max-width:880px){.about-grid{grid-template-columns:1fr;gap:48px}.about-monogram{max-width:220px;position:static}}
+
+  /* AREAS */
+  .areas-list{list-style:none;border-top:1px solid var(--line)}
+  .area-row{display:grid;grid-template-columns:80px 1fr 2fr;gap:64px;padding:40px 0;border-bottom:1px solid var(--line);align-items:start;transition:background .3s;position:relative}
+  .area-row:hover{background:var(--paper-2)}
+  .area-row:hover .area-label::after{transform:translateX(6px)}
+  .area-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.12em;padding-top:10px}
+  .area-label{font-family:'EB Garamond',serif;font-size:clamp(26px,3vw,36px);font-weight:500;line-height:1.2;letter-spacing:-.015em;color:var(--ink);position:relative;padding-right:24px}
+  .area-label::after{content:"→";color:var(--muted);margin-left:12px;transition:transform .3s;display:inline-block;font-weight:400}
+  .area-label em{font-style:italic;font-weight:500}
+  .area-desc{font-size:16px;color:var(--gray);line-height:1.75;padding-top:12px}
+  .area-desc ul{list-style:none;display:grid;gap:4px;margin-top:16px}
+  .area-desc li{font-size:14px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+  .area-desc li::before{content:"— "}
+  @media(max-width:880px){.area-row{grid-template-columns:60px 1fr;gap:20px}.area-desc{grid-column:1/3;padding-top:0}}
+
+  /* MANIFESTO DARK */
+  .manifesto{max-width:860px;margin:0 auto;text-align:left}
+  .manifesto-quote{font-family:'EB Garamond',serif;font-size:clamp(28px,3.8vw,48px);line-height:1.35;font-style:italic;font-weight:400;color:var(--paper);margin-bottom:48px;letter-spacing:-.01em}
+  .manifesto-quote::before{content:"\201C";font-size:1em;color:var(--stone);margin-right:4px}
+  .manifesto-quote::after{content:"\201D";color:var(--stone);margin-left:4px}
+  .manifesto-sig{display:flex;gap:24px;padding-top:32px;border-top:1px solid rgba(255,255,255,.2);align-items:baseline}
+  .manifesto-sig-name{font-family:'EB Garamond',serif;font-size:20px;font-style:italic;color:var(--paper)}
+  .manifesto-sig-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase}
+
+  /* PUBLICATIONS */
+  .pubs{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+  .pub{padding:32px 32px 32px 0;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+  .pub:nth-child(2n){border-right:none;padding-left:32px}
+  .pub-year{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+  .pub h4{font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.3;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .pub h4 em{font-style:italic}
+  .pub-source{font-size:14px;color:var(--gray);font-style:italic;font-family:'EB Garamond',serif}
+  @media(max-width:680px){.pubs{grid-template-columns:1fr}.pub{border-right:none!important;padding:28px 0 28px 0!important}}
+
+  /* CREDENTIALS */
+  .creds{display:grid;grid-template-columns:repeat(2,1fr);gap:64px}
+  .creds-col h3{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+  .creds-list{list-style:none;display:grid;gap:18px}
+  .cred{display:grid;grid-template-columns:80px 1fr;gap:20px;align-items:baseline}
+  .cred-year{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.08em}
+  .cred-body{font-size:16px;line-height:1.55;color:var(--ink-soft)}
+  .cred-body strong{font-weight:500;color:var(--ink);display:block;font-family:'EB Garamond',serif;font-size:18px;margin-bottom:2px}
+  .cred-body em{font-style:italic;font-family:'EB Garamond',serif}
+  @media(max-width:880px){.creds{grid-template-columns:1fr;gap:48px}}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .contact-body{font-family:'EB Garamond',serif;font-size:22px;line-height:1.55;font-style:italic;color:var(--ink-soft);max-width:34ch;font-weight:400}
+  .contact-body p{margin-bottom:24px}
+  .contact-list{display:grid;gap:28px}
+  .contact-row{padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .contact-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .contact-value{font-family:'EB Garamond',serif;font-size:22px;color:var(--ink);line-height:1.4;font-weight:500}
+  .contact-value a{border-bottom:1px solid transparent;transition:border-color .2s}
+  .contact-value a:hover{border-color:var(--ink)}
+  .contact-value em{font-style:italic;font-weight:400;font-size:18px;color:var(--gray);display:block;margin-top:6px}
+  @media(max-width:880px){.contact-grid{grid-template-columns:1fr;gap:48px}}
+
+  /* COLOPHON / FOOTER */
+  .colophon{padding:48px 0;border-top:1px solid var(--line);background:var(--paper)}
+  .colophon-inner{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;max-width:1120px;margin:0 auto;padding:0 48px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap}
+  .colophon-inner a{color:var(--muted);transition:color .2s}
+  .colophon-inner a:hover{color:var(--ink)}
+  .colophon-right{display:flex;gap:32px}
+  @media(max-width:880px){.colophon-inner{grid-template-columns:1fr;gap:20px;padding:0 24px}.colophon-right{gap:24px;flex-wrap:wrap}}
+
+  .disclaimer{padding:32px 0 48px;background:var(--paper-2)}
+  .disclaimer-inner{max-width:780px;margin:0 auto;padding:0 48px;font-size:12px;color:var(--muted);line-height:1.7;text-align:center}
+  @media(max-width:680px){.disclaimer-inner{padding:0 24px}}
+
+  .rule{width:100%;height:1px;background:var(--line);margin:0}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-name">Henrique <em style="font-style:italic">Vasconcelos</em></div>
+      <div class="brand-oab">OAB/RJ 165.233</div>
+    </div>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#atuacao">Atuação</a>
+      <a href="#publicacoes">Publicações</a>
+      <a href="#formacao">Formação</a>
+      <a href="#contato" class="current">Contato</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eye">
+      <div class="hero-eye-row">Advocacia criminal e consultiva · Rio de Janeiro · desde 2008</div>
+    </div>
+    <h1>Henrique<br><em>Vasconcelos</em></h1>
+    <p class="hero-tagline">Defesa penal estratégica e consultoria em direito penal empresarial para casos que exigem discrição, rigor e tempo.</p>
+
+    <div class="hero-foot">
+      <div class="hero-foot-meta">
+        <div>
+          <strong>Atuação</strong>
+          Primeira e segunda instâncias<br>Tribunais Superiores · STF e STJ
+        </div>
+        <div>
+          <strong>Foro</strong>
+          Rio de Janeiro, São Paulo<br>e presencial quando necessário
+        </div>
+        <div>
+          <strong>Acesso</strong>
+          Por indicação ou agenda prévia<br>Não aceitamos captação
+        </div>
+      </div>
+      <a href="#contato" class="hero-cta">
+        Agendar conversa
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<hr class="rule" />
+
+<section class="section" id="sobre">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-label">01 — Sobre</div>
+      <h2>Um ofício <em>antigo</em><br>em ritmo próprio.</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-monogram" aria-hidden="true"></div>
+
+      <div class="about-body">
+        <p>Atuo há dezessete anos em defesa criminal e, desde 2014, em consultoria preventiva para empresas e pessoas expostas a risco penal — em paralelo à docência em direito penal empresarial na Faculdade Nacional de Direito.</p>
+        <p>A banca, mantida com estrutura deliberadamente enxuta, atende um número reduzido de casos por ano. É uma escolha: cada processo exige leitura profunda de autos, diálogo direto com o cliente e tempo para construir tese. Ganho de escala, aqui, resultaria em perda do que efetivamente importa.</p>
+        <p>Defendo pessoas e empresas em investigações preliminares, acordos de não persecução penal, tribunal do júri, recursos em segunda instância e nos tribunais superiores. Em matéria consultiva, atuo na estruturação de programas de integridade, em compliance criminal e em resposta a crises regulatórias e reputacionais.</p>
+        <p>Para detalhes sobre casos conduzidos, estou disponível <a href="#contato">em conversa reservada</a>. A discrição, neste ofício, é menos uma cortesia do que uma regra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section wide" id="atuacao">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-label">02 — Atuação</div>
+      <h2>Quatro frentes<br>de <em>concentração</em>.</h2>
+    </div>
+
+    <ul class="areas-list">
+      <li class="area-row">
+        <div class="area-num">01 /</div>
+        <div class="area-label">Defesa <em>penal</em> estratégica</div>
+        <div class="area-desc">
+          Acompanhamento desde a fase preliminar até recursos nos tribunais superiores, com ênfase em tese defensiva construída caso a caso.
+          <ul>
+            <li>Investigações criminais (MPF, MPE, PF, PC)</li>
+            <li>Acordos de não persecução penal (ANPP)</li>
+            <li>Ações penais em primeira instância</li>
+            <li>Apelações, recursos especiais e extraordinários</li>
+            <li>Habeas corpus e revisões criminais</li>
+          </ul>
+        </div>
+      </li>
+      <li class="area-row">
+        <div class="area-num">02 /</div>
+        <div class="area-label">Crimes <em>econômicos</em> e empresariais</div>
+        <div class="area-desc">
+          Defesa em crimes contra o sistema financeiro, licitações, corrupção, lavagem de capitais e crimes ambientais praticados no exercício de atividade empresarial.
+          <ul>
+            <li>Operação Lava Jato e desdobramentos</li>
+            <li>Crimes de colarinho branco (7.492/86)</li>
+            <li>Lei de licitações e crimes correlatos</li>
+            <li>Responsabilidade penal de administradores</li>
+          </ul>
+        </div>
+      </li>
+      <li class="area-row">
+        <div class="area-num">03 /</div>
+        <div class="area-label">Tribunal <em>do Júri</em></div>
+        <div class="area-desc">
+          Defesa em crimes dolosos contra a vida, com atuação em todas as fases — pronúncia, preparação, plenário e recursos.
+          <ul>
+            <li>Pronúncia, impronúncia e desclassificação</li>
+            <li>Preparação e plenário</li>
+            <li>Recursos em sentido estrito</li>
+          </ul>
+        </div>
+      </li>
+      <li class="area-row">
+        <div class="area-num">04 /</div>
+        <div class="area-label">Compliance <em>criminal</em> e consultoria</div>
+        <div class="area-desc">
+          Trabalho preventivo para empresas e pessoas expostas: estruturação de programas de integridade, resposta a crises regulatórias, opinião técnica e parecer.
+          <ul>
+            <li>Estruturação e revisão de programas de integridade</li>
+            <li>Assessoria em investigações internas</li>
+            <li>Resposta a crises regulatórias e reputacionais</li>
+            <li>Parecer e memorando técnico</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="manifesto">
+      <p class="manifesto-quote">Advocacia criminal de qualidade não se mede pela quantidade de casos conduzidos, mas pela profundidade com que cada um é defendido. Por isso aceito poucos — e não aceito todos.</p>
+      <div class="manifesto-sig">
+        <div class="manifesto-sig-name">Henrique Vasconcelos</div>
+        <div class="manifesto-sig-meta">Rio de Janeiro · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="publicacoes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-label">03 — Publicações</div>
+      <h2>Escritos <em>selecionados</em>.</h2>
+    </div>
+    <div class="pubs">
+      <article class="pub">
+        <div class="pub-year">2025 · Capítulo</div>
+        <h4>Culpabilidade penal do <em>compliance officer</em></h4>
+        <p class="pub-source">In: Compliance criminal e responsabilidade corporativa. Org. Lenio Luiz Streck. Forense.</p>
+      </article>
+      <article class="pub">
+        <div class="pub-year">2024 · Livro</div>
+        <h4>Limites da delação premiada na Lei 12.850/2013</h4>
+        <p class="pub-source">Editora Revista dos Tribunais, 2ª edição revisada e ampliada.</p>
+      </article>
+      <article class="pub">
+        <div class="pub-year">2023 · Artigo</div>
+        <h4>Programa de integridade como <em>atenuante</em> no direito penal</h4>
+        <p class="pub-source">Revista Brasileira de Ciências Criminais, v. 197, p. 211–238.</p>
+      </article>
+      <article class="pub">
+        <div class="pub-year">2022 · Parecer</div>
+        <h4>Responsabilidade penal da pessoa jurídica em crimes ambientais</h4>
+        <p class="pub-source">Parecer elaborado para o Instituto Brasileiro de Direito Penal Econômico.</p>
+      </article>
+      <article class="pub">
+        <div class="pub-year">2020 · Coluna</div>
+        <h4>A busca e apreensão como instrumento de <em>pressão</em></h4>
+        <p class="pub-source">Coluna quinzenal no portal Conjur — Observatório Penal.</p>
+      </article>
+      <article class="pub">
+        <div class="pub-year">2018 · Livro</div>
+        <h4>Crimes contra o sistema financeiro: teoria e prática</h4>
+        <p class="pub-source">Editora Saraiva, prefácio de Sérgio Salomão Shecaira.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section paper-2" id="formacao">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-label">04 — Formação</div>
+      <h2>Formação e <em>filiações</em>.</h2>
+    </div>
+    <div class="creds">
+      <div class="creds-col">
+        <h3>Formação acadêmica</h3>
+        <ul class="creds-list">
+          <li class="cred">
+            <div class="cred-year">2015</div>
+            <div class="cred-body"><strong>Doutorado em Direito</strong><em>Universidade de São Paulo (USP)</em><br>Tese: <em>Responsabilidade penal da pessoa jurídica no direito brasileiro</em>.</div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">2010</div>
+            <div class="cred-body"><strong>Mestrado em Direito Penal</strong><em>Universidade do Estado do Rio de Janeiro (UERJ)</em></div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">2009</div>
+            <div class="cred-body"><strong>Estágio pós-graduado</strong><em>Universitat Pompeu Fabra, Barcelona</em> — Direito penal econômico.</div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">2005</div>
+            <div class="cred-body"><strong>Bacharelado em Direito</strong><em>Faculdade Nacional de Direito · UFRJ</em></div>
+          </li>
+        </ul>
+      </div>
+      <div class="creds-col">
+        <h3>Atuação acadêmica e institucional</h3>
+        <ul class="creds-list">
+          <li class="cred">
+            <div class="cred-year">Atual</div>
+            <div class="cred-body"><strong>Professor adjunto</strong><em>Faculdade Nacional de Direito · UFRJ</em> — Direito Penal Empresarial, pós-graduação.</div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">Desde 2018</div>
+            <div class="cred-body"><strong>Conselheiro</strong><em>Instituto Brasileiro de Ciências Criminais (IBCCRIM)</em></div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">Desde 2016</div>
+            <div class="cred-body"><strong>Associado</strong><em>Instituto dos Advogados Brasileiros (IAB)</em></div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">2020–2023</div>
+            <div class="cred-body"><strong>Comissão de Compliance Criminal</strong><em>OAB/RJ — 2020 a 2023</em></div>
+          </li>
+          <li class="cred">
+            <div class="cred-year">Atual</div>
+            <div class="cred-body"><strong>Membro</strong><em>International Bar Association (IBA)</em> · Criminal Law Committee.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section" id="contato">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-head-label">05 — Contato</div>
+      <h2>Agendar uma <em>conversa</em>.</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-body">
+        <p>A banca atende casos por indicação ou agendamento prévio. O primeiro contato é habitualmente feito por e-mail, quando combinamos um encontro reservado em horário adequado.</p>
+        <p>Respostas em dias úteis, em até vinte e quatro horas. Matéria urgente — prisão em flagrante, mandado em cumprimento — pelo WhatsApp, a qualquer tempo.</p>
+      </div>
+
+      <div class="contact-list">
+        <div class="contact-row">
+          <div class="contact-label">Correspondência</div>
+          <div class="contact-value"><a href="mailto:contato@vasconcelosadv.com.br">contato@vasconcelosadv.com.br</a><em>Preferencial para o primeiro contato</em></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Matéria urgente · WhatsApp</div>
+          <div class="contact-value"><a href="https://wa.me/5521999999999">+55 21 99999-9999</a><em>Plantão 24 horas para urgência penal</em></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Escritório</div>
+          <div class="contact-value">Av. Atlântica, 1702 · 18º andar<em>Copacabana · Rio de Janeiro / RJ · 22021-001<br>Atendimento presencial somente com agendamento</em></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Escritório de apoio · SP</div>
+          <div class="contact-value">Rua Iguatemi, 192 · 12º andar<em>Itaim Bibi · São Paulo / SP · 01451-010</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>© 2026 · Henrique Vasconcelos · Advocacia Criminal · OAB/RJ 165.233 · CNPJ 00.000.000/0001-00</div>
+    <div class="colophon-right">
+      <a href="#">Privacidade</a>
+      <a href="#">LGPD</a>
+      <a href="https://www.oab.org.br/">OAB</a>
+    </div>
+  </div>
+</footer>
+
+<section class="disclaimer">
+  <div class="disclaimer-inner">
+    Sítio eletrônico de caráter exclusivamente informativo, em observância ao Provimento nº 205/2021 do Conselho Federal da OAB e ao Código de Ética e Disciplina. Veda-se expressamente a prospecção de clientela e a mercantilização do exercício da advocacia. Casos mencionados em publicações são anonimizados ou tratam de precedentes de domínio público.
+  </div>
+</section>
+
+</body>
+</html>
