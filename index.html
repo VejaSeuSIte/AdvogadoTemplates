@@ -89,15 +89,18 @@
   .shead-lead{font-size:18px;color:var(--muted);max-width:60ch;line-height:1.6}
 
   /* TEMPLATES BENTO */
-  .templates{display:grid;grid-template-columns:1.2fr 1fr;grid-auto-rows:auto;gap:20px}
+  .templates{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:auto;gap:20px}
   .tpl{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--bg-2);overflow:hidden;transition:all .3s;cursor:pointer;display:flex;flex-direction:column}
   .tpl:hover{border-color:var(--line-2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-  .tpl.feature{grid-row:span 2}
+  .tpl.feature{grid-column:span 3}
   .tpl-preview{position:relative;overflow:hidden;flex-shrink:0;background:var(--bg-3);border-bottom:1px solid var(--line)}
-  .tpl.feature .tpl-preview{aspect-ratio:4/5}
+  .tpl.feature .tpl-preview{aspect-ratio:20/9}
   .tpl:not(.feature) .tpl-preview{aspect-ratio:5/3}
   .tpl-preview iframe{position:absolute;top:0;left:0;width:286%;height:286%;transform:scale(.35);transform-origin:top left;border:0;pointer-events:none}
-  .tpl.feature .tpl-preview iframe{width:250%;height:250%;transform:scale(.4)}
+  .tpl.feature .tpl-preview iframe{width:285%;height:285%;transform:scale(.35)}
+  .tpl.feature .tpl-body{padding:36px 44px 40px}
+  .tpl.feature h3{font-size:42px}
+  .tpl-new-badge{position:absolute;top:16px;left:16px;background:var(--lime);color:var(--bg);padding:6px 14px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;z-index:3;box-shadow:0 6px 16px rgba(163,230,53,.3)}
   .tpl-preview::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,11,.4) 100%);pointer-events:none;transition:opacity .3s}
   .tpl:hover .tpl-preview::after{opacity:.2}
   .tpl-hover-badge{position:absolute;top:16px;right:16px;background:rgba(10,10,11,.8);backdrop-filter:blur(10px);border:1px solid var(--line-2);padding:6px 12px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);display:flex;align-items:center;gap:6px;opacity:0;transform:translateY(-4px);transition:all .3s;z-index:2}
@@ -122,7 +125,7 @@
   .tpl-btn:hover{background:var(--bg-4);border-color:var(--muted)}
   .tpl-btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
   .tpl-btn.primary:hover{background:var(--cyan);border-color:var(--cyan);color:var(--bg)}
-  @media(max-width:980px){.templates{grid-template-columns:1fr}.tpl.feature{grid-row:auto}.tpl.feature .tpl-preview{aspect-ratio:5/3}}
+  @media(max-width:980px){.templates{grid-template-columns:1fr}.tpl.feature{grid-column:auto}.tpl.feature .tpl-preview{aspect-ratio:5/3}.tpl.feature .tpl-body{padding:28px 28px 32px}.tpl.feature h3{font-size:28px}}
 
   /* FEATURES */
   .features-section{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -140,19 +143,21 @@
   @media(max-width:880px){.features{grid-template-columns:1fr}.feat{border-left:none;border-bottom:1px solid var(--line)!important}.feat:first-child{border-top:none}}
 
   /* DECISION MATRIX */
-  .matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
-  .matrix-card{padding:36px 32px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));position:relative;overflow:hidden}
+  .matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px}
+  .matrix-card{padding:32px 28px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));position:relative;overflow:hidden}
   .matrix-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-color,var(--cyan))}
   .matrix-card.cyan{--accent-color:var(--cyan)}
   .matrix-card.amber{--accent-color:var(--amber)}
   .matrix-card.purple{--accent-color:var(--purple)}
+  .matrix-card.coral{--accent-color:var(--coral)}
   .matrix-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:100px;color:var(--accent-color);background:rgba(255,255,255,.03);border:1px solid var(--accent-color);margin-bottom:20px;text-transform:uppercase;letter-spacing:.1em}
   .matrix-card h4{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:24px;letter-spacing:-.02em;margin-bottom:14px}
   .matrix-card p{color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:20px}
   .matrix-card ul{list-style:none;display:grid;gap:10px}
   .matrix-card li{font-size:14px;color:var(--text-2);display:flex;gap:10px;align-items:flex-start}
   .matrix-card li::before{content:"→";color:var(--accent-color);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px}
-  @media(max-width:880px){.matrix{grid-template-columns:1fr}}
+  @media(max-width:1100px){.matrix{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.matrix{grid-template-columns:1fr}}
 
   /* TERMINAL */
   .terminal-section{padding:120px 0;position:relative}
@@ -222,7 +227,7 @@
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
-      v2.0 · feitos pra advogado autônomo · atualizado em abr/2026
+      v2.1 · 4 templates · feitos pra advogado autônomo · atualizado em abr/2026
     </div>
     <h1>Sites que <em>advogados autônomos</em> levam a sério — e conseguem manter sozinhos.</h1>
     <p class="hero-sub">Três arquétipos construídos a partir da análise de <code>sites reais</code> de advogados individuais brasileiros — não escritórios. Identidade pessoal, OAB visível, WhatsApp integrado, LGPD pronta. HTML puro, deploy direto no GitHub Pages.</p>
@@ -238,7 +243,7 @@
 
     <div class="hero-stats">
       <div class="hstat">
-        <div class="hstat-num">3 <em>arquétipos</em></div>
+        <div class="hstat-num">4 <em>arquétipos</em></div>
         <div class="hstat-lbl">Advogado solo, não escritório</div>
       </div>
       <div class="hstat">
@@ -263,13 +268,47 @@
       <div class="shead-eyebrow">
         <span>01 / Templates</span>
       </div>
-      <h2>Três arquétipos de <em>advogado autônomo</em>, três templates.</h2>
-      <p class="shead-lead">A pesquisa mostrou que advogados individuais brasileiros se organizam em três perfis bem distintos: a marca pessoal editorial, o especialista em alta conversão via tráfego e o solo premium que vive de indicação. Cada um pede um site diferente.</p>
+      <h2>Quatro arquétipos de <em>advogado autônomo</em>, quatro templates.</h2>
+      <p class="shead-lead">A pesquisa identificou quatro perfis bem distintos de advogados individuais brasileiros: quem usa identidade visual forte com retrato, quem investe em marca pessoal editorial, quem vive de tráfego pago e quem atende só por indicação. Cada um pede um site com gramática própria.</p>
     </div>
 
     <div class="templates">
 
-      <article class="tpl feature" onclick="window.location.href='templates/personal-brand/'">
+      <article class="tpl feature" onclick="window.location.href='templates/banner-retrato/'">
+        <div class="tpl-preview">
+          <div class="tpl-new-badge">Novo · Abr 2026</div>
+          <iframe src="templates/banner-retrato/" loading="lazy" title="Banner Retrato preview"></iframe>
+          <div class="tpl-hover-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            Abrir ao vivo
+          </div>
+        </div>
+        <div class="tpl-body">
+          <div class="tpl-tags">
+            <span class="tag coral">identidade visual forte</span>
+            <span class="tag amber">foto cutout</span>
+            <span class="tag lime">depoimentos Google</span>
+            <span class="tag neutral">trabalhista · INSS</span>
+          </div>
+          <h3>01 · Banner <em>Retrato</em></h3>
+          <p class="tpl-desc">Para o advogado autônomo que tem foto profissional e quer usar. Hero split com retrato em corte transparente sobre fundo terracota texturizado, banner visual secundário com ilustração temática (balança + carteira de trabalho), depoimentos em cards estilo Google Reviews com rating agregado. Playfair Display + Inter, paleta quente, WhatsApp em CTA verde.</p>
+          <div class="tpl-meta">
+            <span>🖼️ hero cutout + banner visual</span>
+            <span>⭐ 6 cards estilo Google Reviews</span>
+            <span>📐 Playfair Display + Inter</span>
+          </div>
+          <div class="tpl-actions">
+            <a href="templates/banner-retrato/" class="tpl-btn primary">
+              Ver ao vivo →
+            </a>
+            <a href="https://github.com/VejaSeuSIte/AdvogadoTemplates/tree/main/templates/banner-retrato" class="tpl-btn">
+              Código
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="tpl" onclick="window.location.href='templates/personal-brand/'">
         <div class="tpl-preview">
           <iframe src="templates/personal-brand/" loading="lazy" title="Personal Brand preview"></iframe>
           <div class="tpl-hover-badge">
@@ -281,14 +320,12 @@
           <div class="tpl-tags">
             <span class="tag amber">marca pessoal</span>
             <span class="tag neutral">editorial</span>
-            <span class="tag neutral">tom acolhedor</span>
             <span class="tag coral">família · sucessões</span>
           </div>
-          <h3>01 · Personal <em>Brand</em></h3>
-          <p class="tpl-desc">Para advogadas e advogados cuja marca é o próprio nome. Editorial quente em terracota e creme, tipografia Cormorant, hero com retrato, seção "como trabalho" em primeira pessoa, depoimentos em estilo revista. Feito pra família, sucessões, consultivo PF.</p>
+          <h3>02 · Personal <em>Brand</em></h3>
+          <p class="tpl-desc">Advogada/advogado cuja marca é o nome. Editorial quente em terracota, Cormorant Garamond, "como trabalho" em primeira pessoa, depoimentos estilo revista.</p>
           <div class="tpl-meta">
             <span>📖 editorial cálido</span>
-            <span>⚡ WhatsApp flutuante</span>
             <span>📐 Cormorant + Inter</span>
           </div>
           <div class="tpl-actions">
@@ -316,8 +353,8 @@
             <span class="tag lime">trabalhista · INSS</span>
             <span class="tag amber">tráfego pago</span>
           </div>
-          <h3>02 · High-<em>Conversion</em></h3>
-          <p class="tpl-desc">Para o advogado solo que vive de Google Ads e orgânico. Hero split com form sticky, WhatsApp dominante, 8 áreas-problema, métricas, depoimentos com rating, seção de urgência por prescrição e FAQ expansível.</p>
+          <h3>03 · High-<em>Conversion</em></h3>
+          <p class="tpl-desc">Solo que vive de Google Ads. Hero split com form sticky, WhatsApp dominante, 8 problema-cards, urgência por prescrição, FAQ expansível.</p>
           <div class="tpl-meta">
             <span>📱 form + WA sticky</span>
             <span>⚡ 8 problemas resolvidos</span>
@@ -340,11 +377,10 @@
         <div class="tpl-body">
           <div class="tpl-tags">
             <span class="tag purple">minimalista</span>
-            <span class="tag neutral">indicação</span>
             <span class="tag neutral">criminal · tributário</span>
           </div>
-          <h3>03 · Quiet <em>Authority</em></h3>
-          <p class="tpl-desc">Para o solo premium que vive de reputação e indicação. Sem foto, sem hype, sem formulário: EB Garamond gigante, papel creme, manifesto, publicações, formação acadêmica. Banca que atende "por agendamento prévio".</p>
+          <h3>04 · Quiet <em>Authority</em></h3>
+          <p class="tpl-desc">Solo premium de reputação e indicação. Sem foto, sem hype: EB Garamond gigante, papel creme, manifesto, publicações, formação acadêmica.</p>
           <div class="tpl-meta">
             <span>📚 publicações + formação</span>
             <span>🎨 EB Garamond + Inter</span>
@@ -417,39 +453,51 @@
     </div>
 
     <div class="matrix">
-      <div class="matrix-card amber">
-        <span class="matrix-tag">01 · Personal Brand</span>
-        <h4>Você é a marca</h4>
-        <p>Advogada ou advogado autônomo em família, sucessões ou consultivo PF. Cliente vem por indicação, Instagram e busca pelo nome.</p>
+      <div class="matrix-card coral">
+        <span class="matrix-tag">01 · Banner Retrato</span>
+        <h4>Foto profissional é seu ativo</h4>
+        <p>Trabalhista, previdenciário, civil. Você tem (ou vai ter) retrato profissional em PNG e quer usar no hero como identidade visual forte — ao estilo Karina Roizenblit.</p>
         <ul>
-          <li>Atende 10–30 casos ativos por vez</li>
-          <li>Vende relação próxima e escuta</li>
-          <li>Instagram e conteúdo importam</li>
+          <li>Cliente PF, ticket médio e volume constante</li>
+          <li>Atende presencial + online pela região</li>
+          <li>Foto cutout + banner visual + reviews Google</li>
+          <li>Ticket R$ 1k–R$ 15k por caso</li>
+        </ul>
+      </div>
+
+      <div class="matrix-card amber">
+        <span class="matrix-tag">02 · Personal Brand</span>
+        <h4>Você é a marca</h4>
+        <p>Família, sucessões, consultivo PF. Cliente vem por indicação e Instagram. Você vende relação próxima, escuta, autoridade editorial.</p>
+        <ul>
+          <li>10–30 casos ativos por vez</li>
+          <li>Conteúdo e artigos importam</li>
+          <li>Tom acolhedor, não corporate</li>
           <li>Ticket R$ 3k–R$ 25k por caso</li>
         </ul>
       </div>
 
       <div class="matrix-card cyan">
-        <span class="matrix-tag">02 · High-Conversion</span>
+        <span class="matrix-tag">03 · High-Conversion</span>
         <h4>Tráfego vira cliente</h4>
-        <p>Advogado solo em trabalhista, previdenciário ou consumidor. Vive de Google Ads, orgânico e indicação em volume.</p>
+        <p>Trabalhista, INSS, consumidor em volume. Vive de Google Ads e orgânico. Ticket popular, honorários por êxito.</p>
         <ul>
-          <li>Cliente busca ("advogado INSS", "horas extras")</li>
-          <li>Fecha no WhatsApp, atende online</li>
-          <li>Honorários em % do êxito</li>
+          <li>Cliente busca ("advogado INSS")</li>
+          <li>Fecha no WhatsApp, 100% digital</li>
+          <li>Form sticky + urgência + FAQ</li>
           <li>Ticket R$ 500–R$ 10k por caso</li>
         </ul>
       </div>
 
       <div class="matrix-card purple">
-        <span class="matrix-tag">03 · Quiet Authority</span>
+        <span class="matrix-tag">04 · Quiet Authority</span>
         <h4>Indicação e reputação</h4>
-        <p>Solo premium em criminal, tributário consultivo ou societário. Não prospecta — é procurado. Aceita poucos casos por ano.</p>
+        <p>Criminal, tributário, societário premium. Não prospecta — é procurado. Aceita poucos casos por ano.</p>
         <ul>
-          <li>Cliente chega por indicação qualificada</li>
-          <li>Vende discrição, profundidade e tempo</li>
+          <li>Indicação qualificada só</li>
+          <li>Vende discrição e profundidade</li>
           <li>Publicações e academia pesam</li>
-          <li>Ticket R$ 30k+ ou honorário por hora</li>
+          <li>Ticket R$ 30k+ ou hora técnica</li>
         </ul>
       </div>
     </div>
@@ -513,6 +561,7 @@
       <div>
         <h5>Templates</h5>
         <ul>
+          <li><a href="templates/banner-retrato/">Banner Retrato <span style="color:var(--lime);font-size:10px">· novo</span></a></li>
           <li><a href="templates/personal-brand/">Personal Brand</a></li>
           <li><a href="templates/high-conversion/">High-Conversion</a></li>
           <li><a href="templates/quiet-authority/">Quiet Authority</a></li>
@@ -528,7 +577,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <div>© 2026 · AdvogadoTemplates · v2.0 · advogado autônomo edition</div>
+      <div>© 2026 · AdvogadoTemplates · v2.1 · 4 templates · advogado autônomo edition</div>
       <div>built with &lt;/&gt; · hosted on github pages</div>
     </div>
   </div>
