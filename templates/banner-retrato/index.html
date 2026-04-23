@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#3d1f10" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/common.css" />
 <style>
   :root{
     --hero-1:#5a2e1c;
@@ -322,9 +323,244 @@
   .wa-fab:hover{background:var(--green-wa-d);transform:translateY(-2px)}
   .wa-fab svg{width:26px;height:26px;fill:currentColor}
   @media(max-width:540px){.wa-fab{padding:14px;width:56px;height:56px;justify-content:center;gap:0}.wa-fab-text{display:none}}
+
+  /* =================================================================
+     VISUAL UPGRADE 2026-04-23 — animações, ornamentos, seções novas
+     ================================================================= */
+  :root{--vs-accent:var(--terra-500);--vs-accent-2:var(--gold);--vs-gold:var(--gold)}
+
+  /* KEYFRAMES custom */
+  @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+  @keyframes haloSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,165,116,.35)}50%{box-shadow:0 0 0 14px rgba(200,165,116,0)}}
+  @keyframes starPop{from{opacity:0;transform:scale(.2) rotate(-30deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+  @keyframes countHighlight{0%,100%{color:var(--terra-500)}50%{color:var(--gold-d)}}
+  @keyframes heroShineSweep{0%{transform:translateX(-120%) skewX(-18deg)}100%{transform:translateX(320%) skewX(-18deg)}}
+
+  /* HERO portrait vivo */
+  .hero{overflow:hidden}
+  .portrait-wrap{perspective:1200px}
+  .portrait{animation:breath 6s ease-in-out infinite;transform-origin:center 80%}
+  .portrait svg{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .portrait-frame{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .portrait-wrap:hover .portrait svg{transform:translateZ(20px)}
+  .portrait-wrap:hover .portrait-frame{transform:translateX(-50%) scale(1.02)}
+
+  /* Halo dourado girando atrás do retrato */
+  .portrait-frame::after{
+    content:"";position:absolute;inset:-20px;border-radius:250px 250px 22px 22px;
+    background:conic-gradient(from 0deg, transparent 0%, rgba(200,165,116,.6) 25%, transparent 50%, transparent 100%);
+    -webkit-mask:radial-gradient(transparent calc(100% - 1.5px), #000 calc(100% - 1px));
+    mask:radial-gradient(transparent calc(100% - 1.5px), #000 calc(100% - 1px));
+    animation:haloSpin 22s linear infinite;
+    pointer-events:none;z-index:0;opacity:.7;
+  }
+
+  /* Stars reveal sequencial */
+  .hero-rating-stars svg{animation:starPop .5s cubic-bezier(.34,1.56,.64,1) backwards}
+  .hero-rating-stars svg:nth-child(1){animation-delay:.9s}
+  .hero-rating-stars svg:nth-child(2){animation-delay:1.05s}
+  .hero-rating-stars svg:nth-child(3){animation-delay:1.2s}
+  .hero-rating-stars svg:nth-child(4){animation-delay:1.35s}
+  .hero-rating-stars svg:nth-child(5){animation-delay:1.5s}
+
+  /* Hero CTA com shimmer */
+  .hero-cta,.banner-cta,.form-btn,.nav-cta{position:relative;overflow:hidden;isolation:isolate}
+  .hero-cta::before,.banner-cta::before,.form-btn::before,.nav-cta::before{
+    content:"";position:absolute;top:0;left:0;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);
+    transform:translateX(-120%) skewX(-18deg);z-index:1;pointer-events:none;
+  }
+  .hero-cta:hover::before,.banner-cta:hover::before,.form-btn:hover::before,.nav-cta:hover::before{animation:heroShineSweep .9s cubic-bezier(.22,.8,.24,1) forwards}
+
+  /* Hero entrance (texto) */
+  .hero-eye{animation:vs-fadeUp .8s cubic-bezier(.22,.8,.24,1) .05s both}
+  .hero h1{animation:vs-fadeUp .9s cubic-bezier(.22,.8,.24,1) .18s both}
+  .hero-sub{animation:vs-fadeUp .9s cubic-bezier(.22,.8,.24,1) .32s both}
+  .hero-online{animation:vs-fadeUp .9s cubic-bezier(.22,.8,.24,1) .44s both}
+  .hero-cta{animation:vs-fadeUp .9s cubic-bezier(.22,.8,.24,1) .56s both}
+  .hero-rating{animation:vs-fadeUp .9s cubic-bezier(.22,.8,.24,1) .68s both}
+  .portrait-wrap{animation:vs-fadeScale 1.3s cubic-bezier(.22,.8,.24,1) .25s both}
+  .portrait-stats{animation:vs-fadeRight .9s cubic-bezier(.22,.8,.24,1) 1.4s both}
+
+  /* Live-dot badge */
+  .hero-live{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.35);border-radius:100px;font-size:13px;font-weight:600;color:#eaffe9;margin-bottom:16px;margin-top:8px;letter-spacing:.01em}
+  .hero-live::before{content:"";width:9px;height:9px;border-radius:50%;background:#25d366;animation:ringPulse 2s ease-in-out infinite,vs-pulseGlow 2s ease-in-out infinite}
+  .hero-live.off{background:rgba(155,133,119,.18);border-color:rgba(155,133,119,.35);color:#d4b497}
+  .hero-live.off::before{background:#9b8577;animation:none}
+
+  /* Shead ornamento (flourish) */
+  .shead-flourish{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 24px;max-width:220px;color:var(--gold)}
+  .shead-flourish::before,.shead-flourish::after{content:"";flex:1;height:1px;background:currentColor;opacity:.45}
+  .shead-flourish svg{width:22px;height:22px;flex-shrink:0;opacity:.85}
+  .section.dark .shead-flourish{color:var(--gold)}
+
+  /* AREAS — card tilt + stroke-draw no icon */
+  .area{transform-style:preserve-3d;will-change:transform}
+  .area:hover{transform:translateY(-6px) rotateX(2deg) rotateY(-2deg);box-shadow:0 28px 50px rgba(93,47,29,.18)}
+  .area-ico svg path,.area-ico svg polyline,.area-ico svg line,.area-ico svg circle,.area-ico svg rect{transition:stroke-dashoffset .8s cubic-bezier(.22,.8,.24,1)}
+  .area .area-ico svg{overflow:visible}
+  .area-tag{position:absolute;bottom:14px;right:16px;font-size:11px;color:var(--terra-500);font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:all .3s;pointer-events:none}
+  .area:hover .area-tag{opacity:1;transform:translateY(0)}
+
+  /* STEPS timeline progress */
+  .steps{position:relative}
+  .steps-progress{position:absolute;top:36px;left:6%;right:6%;height:2px;background:rgba(255,255,255,.1);z-index:0}
+  .steps-progress::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--gold),#fff);transform-origin:left;transform:scaleX(var(--tp,0));transition:transform .25s linear}
+  .step-num{position:relative}
+  .step-num::before{
+    content:"";position:absolute;inset:-5px;border-radius:50%;
+    background:conic-gradient(var(--gold) var(--p,0%), transparent var(--p,0%));
+    -webkit-mask:radial-gradient(transparent calc(100% - 3px), #000 calc(100% - 2px));
+    mask:radial-gradient(transparent calc(100% - 3px), #000 calc(100% - 2px));
+    transition:--p .8s ease;pointer-events:none;
+  }
+  @property --p{syntax:'<percentage>';initial-value:0%;inherits:false}
+  @media(max-width:980px){.steps-progress{display:none}}
+
+  /* QUOTE BAND reveal */
+  .quote-band h3 .word{display:inline-block;opacity:0;transform:translateY(14px) rotateX(8deg);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .quote-band[data-in] .word{opacity:1;transform:none}
+  .quote-mark svg path{stroke-dasharray:400;stroke-dashoffset:400;fill:none;stroke:var(--terra-300);stroke-width:1;transition:stroke-dashoffset 1.4s cubic-bezier(.22,.8,.24,1),fill .6s;color:var(--terra-200)}
+  .quote-band[data-in] .quote-mark svg path{stroke-dashoffset:0;fill:currentColor}
+  .quote-band::after{content:"";display:block;height:1px;width:0;background:var(--gold);margin:40px auto 0;transition:width 1.2s cubic-bezier(.22,.8,.24,1) .8s;opacity:.6}
+  .quote-band[data-in]::after{width:120px}
+
+  /* GCARDS — masonry-feel + ring avatar */
+  .gcards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start}
+  .gcard{transform:translateY(0);transition:transform .3s cubic-bezier(.22,.8,.24,1),box-shadow .3s,border-color .25s}
+  .gcard:nth-child(odd){transform:translateY(0)}
+  .gcard:nth-child(even){transform:translateY(14px)}
+  .gcard:hover{transform:translateY(-6px) !important;box-shadow:0 24px 42px rgba(93,47,29,.15);border-color:var(--terra-300)}
+  .gcard-avatar{box-shadow:0 0 0 2px transparent,0 0 0 4px var(--terra-300);transition:box-shadow .3s}
+  .gcard:hover .gcard-avatar{box-shadow:0 0 0 2px transparent,0 0 0 4px var(--star)}
+  @media(max-width:980px){.gcards{grid-template-columns:1fr}.gcard:nth-child(even){transform:translateY(0)}}
+
+  /* FAQ search + better icon */
+  .faq-search{max-width:560px;margin:0 auto 28px;position:relative}
+  .faq-search input{width:100%;padding:14px 20px 14px 48px;background:#fff;border:1.5px solid var(--line);border-radius:100px;font-family:inherit;font-size:15px;color:var(--ink);outline:none;transition:all .2s;box-shadow:0 4px 14px rgba(93,47,29,.04)}
+  .faq-search input:focus{border-color:var(--terra-400);box-shadow:0 6px 18px rgba(93,47,29,.08)}
+  .faq-search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--terra-400);pointer-events:none}
+  .q.hidden{display:none}
+  .q summary::after{content:"";width:14px;height:14px;position:relative;flex-shrink:0}
+  .q summary::before{content:"";position:absolute;right:34px;width:14px;height:2px;background:var(--terra-500);transition:transform .3s}
+  .q summary{padding-right:52px}
+  .q summary::after{position:absolute;right:34px;background:var(--terra-500);width:2px;height:14px;transition:transform .3s;content:""}
+  .q[open] summary::after{transform:rotate(90deg);opacity:0}
+
+  /* CTA BAND — cinemascope com gradient-follow + shine */
+  .cta-band{position:relative}
+  .cta-band::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle 700px at var(--mx,50%) var(--my,50%), rgba(200,165,116,.18), transparent 60%);
+    pointer-events:none;z-index:0;transition:background .4s;
+  }
+  .cta-inner{position:relative;z-index:2}
+  .cta-inner h2{background:linear-gradient(90deg,#fff 0%,#fff 30%,var(--gold) 50%,#fff 70%,#fff 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:vs-textShine 7s linear infinite}
+  .cta-inner h2 em{color:var(--gold);-webkit-text-fill-color:var(--gold);font-style:italic}
+  .cta-floaters{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+  .cta-floaters span{position:absolute;font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(80px,12vw,160px);color:rgba(200,165,116,.06);white-space:nowrap;user-select:none}
+  .cta-floaters span:nth-child(1){top:-20px;left:-40px;transform:rotate(-8deg)}
+  .cta-floaters span:nth-child(2){bottom:-30px;right:-30px;transform:rotate(6deg)}
+
+  /* DIAGNÓSTICO INTERATIVO (seção nova) */
+  .diagnostic{padding:96px 0;background:linear-gradient(180deg,var(--cream-2) 0%,var(--cream) 100%);position:relative;overflow:hidden}
+  .diagnostic-wrap{max-width:760px;margin:0 auto;padding:0 32px;text-align:center;position:relative;z-index:1}
+  .diagnostic-eye{display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--terra-500);text-transform:uppercase;font-weight:700;margin-bottom:14px;padding:6px 14px;background:rgba(155,90,62,.1);border-radius:100px}
+  .diagnostic h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(30px,4.5vw,48px);line-height:1.1;color:var(--ink);margin-bottom:16px;letter-spacing:-.015em}
+  .diagnostic h2 em{font-style:italic;color:var(--terra-500)}
+  .diagnostic .lead{font-size:17px;color:var(--gray);max-width:52ch;margin:0 auto 40px;line-height:1.65}
+  .quiz{background:#fff;border:1px solid var(--line);border-radius:22px;padding:40px 36px;box-shadow:0 24px 60px rgba(93,47,29,.08);text-align:left;position:relative;overflow:hidden;min-height:380px}
+  .quiz-progress{position:absolute;top:0;left:0;right:0;height:4px;background:var(--cream-2)}
+  .quiz-progress::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--terra-500),var(--gold));transform-origin:left;transform:scaleX(var(--qp,.33));transition:transform .5s cubic-bezier(.22,.8,.24,1)}
+  .quiz-step{display:none;animation:vs-fadeUp .5s cubic-bezier(.22,.8,.24,1)}
+  .quiz-step.active{display:block}
+  .quiz-step-num{font-size:12px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .quiz-step h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--ink);margin-bottom:24px;line-height:1.25;letter-spacing:-.01em}
+  .quiz-opts{display:grid;gap:12px}
+  .quiz-opt{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--cream);border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:all .25s;text-align:left;font-family:inherit;font-size:15px;font-weight:500;color:var(--ink-soft);width:100%;position:relative}
+  .quiz-opt:hover{border-color:var(--terra-400);background:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(93,47,29,.08)}
+  .quiz-opt-ico{width:36px;height:36px;border-radius:10px;background:var(--cream-2);color:var(--terra-500);display:grid;place-items:center;flex-shrink:0;transition:all .25s}
+  .quiz-opt:hover .quiz-opt-ico{background:var(--terra-500);color:#fff}
+  .quiz-opt svg{width:18px;height:18px}
+  .quiz-opt::after{content:"→";margin-left:auto;color:var(--terra-300);font-size:20px;transition:all .25s}
+  .quiz-opt:hover::after{color:var(--terra-500);transform:translateX(4px)}
+  .quiz-back{background:none;border:none;color:var(--terra-500);font-size:13px;font-weight:600;cursor:pointer;padding:8px 0;margin-bottom:14px;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+  .quiz-back:hover{color:var(--terra-700)}
+  .quiz-result{display:none;animation:vs-fadeUp .6s cubic-bezier(.22,.8,.24,1)}
+  .quiz-result.active{display:block}
+  .quiz-result-head{text-align:center;margin-bottom:24px}
+  .quiz-result-head svg{width:56px;height:56px;color:var(--green-wa);margin-bottom:14px}
+  .quiz-result h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--ink);margin-bottom:10px}
+  .quiz-result p{color:var(--gray);line-height:1.7;margin-bottom:18px}
+  .quiz-result-cta{display:inline-flex;align-items:center;gap:12px;background:var(--green-wa);color:#fff;padding:16px 32px;border-radius:100px;font-weight:700;font-size:15px;letter-spacing:.01em;box-shadow:0 12px 30px rgba(37,211,102,.4);transition:all .25s}
+  .quiz-result-cta:hover{background:var(--green-wa-d);transform:translateY(-2px);box-shadow:0 16px 40px rgba(37,211,102,.5)}
+  .quiz-result-cta svg{width:20px;height:20px;fill:currentColor}
+  @media(max-width:640px){.quiz{padding:28px 22px}.quiz-step h3{font-size:22px}}
+
+  /* CASO DO MÊS */
+  .case-month{padding:72px 0;background:var(--cream)}
+  .case-month-wrap{max-width:940px;margin:0 auto;padding:0 32px}
+  .case-card{background:linear-gradient(135deg,#fff 0%,var(--cream-2) 100%);border:1px solid var(--line-2);border-radius:22px;padding:44px;display:grid;grid-template-columns:auto 1fr auto;gap:36px;align-items:center;box-shadow:0 24px 56px rgba(93,47,29,.08);position:relative;overflow:hidden}
+  .case-card::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:linear-gradient(180deg,var(--terra-500),var(--gold))}
+  .case-seal{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--terra-600),var(--terra-700));color:var(--cream);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;text-align:center;line-height:1.1;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 10px 24px rgba(93,47,29,.25);position:relative}
+  .case-seal::after{content:"";position:absolute;inset:-6px;border:1.5px dashed var(--gold);border-radius:50%;animation:haloSpin 60s linear infinite;opacity:.6}
+  .case-seal span{font-size:22px;font-weight:700;font-style:italic;color:var(--gold);display:block}
+  .case-body{min-width:0}
+  .case-label{font-size:11px;letter-spacing:.2em;color:var(--terra-500);font-weight:700;text-transform:uppercase;margin-bottom:10px}
+  .case-body h3{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,34px);font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:8px;letter-spacing:-.01em}
+  .case-body h3 em{font-style:italic;color:var(--terra-500);font-weight:600}
+  .case-amount{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,48px);font-weight:700;color:var(--terra-600);line-height:1;letter-spacing:-.02em}
+  .case-body p{color:var(--gray);line-height:1.6;font-size:15px;margin-top:10px}
+  .case-cta{background:var(--terra-500);color:#fff;padding:14px 24px;border-radius:100px;font-size:13px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;transition:all .2s;display:inline-flex;align-items:center;gap:8px;box-shadow:0 10px 24px rgba(155,90,62,.3)}
+  .case-cta:hover{background:var(--terra-700);transform:translateY(-2px);box-shadow:0 14px 32px rgba(155,90,62,.4)}
+  .case-cta svg{width:14px;height:14px;fill:currentColor}
+  @media(max-width:780px){.case-card{grid-template-columns:1fr;text-align:center;padding:32px 24px}.case-seal{margin:0 auto}.case-cta{justify-self:center}}
+
+  /* SEPARATOR ornament entre seções */
+  .ornament{display:flex;align-items:center;justify-content:center;gap:18px;padding:24px 0;color:var(--terra-400)}
+  .ornament::before,.ornament::after{content:"";width:80px;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent)}
+  .ornament svg{width:22px;height:22px;opacity:.7}
+
+  /* Topbar live dot */
+  .topbar-live{display:inline-flex;align-items:center;gap:6px;color:#a7e8a8}
+  .topbar-live::before{content:"";width:7px;height:7px;border-radius:50%;background:#25d366;animation:ringPulse 2s ease-in-out infinite}
+  .topbar-live.off{color:#9b8577}
+  .topbar-live.off::before{background:#6b5548;animation:none}
+
+  /* HERO dust particles positioning */
+  .hero-dust{position:absolute;inset:0;pointer-events:none;z-index:0}
+
+  /* Drop cap sutil no about */
+  .about-body p:first-of-type::first-letter{font-family:'Playfair Display',serif;font-size:4em;float:left;line-height:.88;padding:6px 14px 0 0;color:var(--terra-500);font-weight:600}
+
+  /* Banner art decorativa com float */
+  .banner-art svg{animation:breath 8s ease-in-out infinite}
+
+  /* Scroll progress bar accent */
+  .vs-scroll-progress{--vs-accent:var(--terra-500);--vs-accent-2:var(--gold)}
+
+  /* Reveal helpers para conteúdo inline */
+  [data-reveal-children] > *{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,.8,.24,1),transform .7s cubic-bezier(.22,.8,.24,1)}
+  [data-reveal-children][data-in] > *{opacity:1;transform:none}
+  [data-reveal-children][data-in] > *:nth-child(1){transition-delay:0s}
+  [data-reveal-children][data-in] > *:nth-child(2){transition-delay:.08s}
+  [data-reveal-children][data-in] > *:nth-child(3){transition-delay:.16s}
+  [data-reveal-children][data-in] > *:nth-child(4){transition-delay:.24s}
+  [data-reveal-children][data-in] > *:nth-child(5){transition-delay:.32s}
+  [data-reveal-children][data-in] > *:nth-child(6){transition-delay:.4s}
+
+  /* PRINT / reduced motion fix */
+  @media(prefers-reduced-motion:reduce){
+    .portrait,.portrait-frame::after,.banner-art svg,.case-seal::after{animation:none !important}
+    .hero-rating-stars svg{animation:none;opacity:1}
+    .cta-inner h2{animation:none;-webkit-text-fill-color:#fff;color:#fff;background:none}
+    .hero-cta::before,.banner-cta::before,.form-btn::before,.nav-cta::before{display:none}
+  }
+
 </style>
 </head>
-<body>
+<body data-scroll-progress>
 
 <div class="topbar">
   <div class="topbar-inner">
@@ -337,6 +573,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         4,9 de 5 · 137 avaliações no Google
       </span>
+      <span class="topbar-live" data-live data-live-on="Dra. Laura está online agora" data-live-off="Retorno em até 2h úteis"><span data-live-text>Dra. Laura está online agora</span></span>
       <span style="color:#d4b497">Campinas, SP · atendimento online em todo Brasil</span>
     </div>
     <div class="topbar-right">
@@ -373,13 +610,14 @@
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" data-dust="14">
   <div class="wrap">
     <div class="hero-grid">
       <div>
         <div class="hero-eye">Dra. Laura Benetti · OAB/SP 378.422</div>
         <h1>Advogada <em>Trabalhista</em> em Campinas e região</h1>
         <p class="hero-sub">Defendo trabalhadores em Campinas, Valinhos, Indaiatuba, Jundiaí e região metropolitana há mais de 15 anos — com atendimento direto, sem intermediário, sem cobrar nada para analisar seu caso.</p>
+        <div class="hero-live" data-live data-live-on="Atendendo no WhatsApp agora" data-live-off="Resposta em até 2h úteis"><span data-live-text>Atendendo no WhatsApp agora</span></div>
         <div class="hero-online">Atendimento presencial e online</div>
         <a href="https://wa.me/5519995550000?text=Ol%C3%A1%2C%20Dra.%20Laura.%20Gostaria%20de%20analisar%20meu%20caso." class="hero-cta">
           <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.1 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.33 4.96L2 22l5.15-1.35c1.45.79 3.09 1.21 4.85 1.21 5.5 0 9.96-4.46 9.96-9.96S17.5 2.04 12 2.04z"/></svg>
@@ -459,11 +697,11 @@
         </div>
         <div class="portrait-stats">
           <div class="pstat a">
-            <div class="pstat-num">+15 anos</div>
+            <div class="pstat-num">+<span data-count="15" data-count-duration="1400">15</span> anos</div>
             <div class="pstat-lbl">de experiência</div>
           </div>
           <div class="pstat b">
-            <div class="pstat-num">+92%</div>
+            <div class="pstat-num">+<span data-count="92" data-count-suffix="%" data-count-duration="1600">92%</span></div>
             <div class="pstat-lbl">das causas ganhas</div>
           </div>
         </div>
@@ -472,7 +710,7 @@
   </div>
 </header>
 
-<section class="quote-band">
+<section class="quote-band" data-reveal="fade">
   <div class="wrap">
     <div class="quote-row">
       <div class="quote-mark">
@@ -480,7 +718,7 @@
           <path d="M5 55 Q5 20 25 10 L30 20 Q15 28 15 40 L25 40 Q30 40 30 45 L30 55 Q30 58 27 58 L8 58 Q5 58 5 55 Z M45 55 Q45 20 65 10 L70 20 Q55 28 55 40 L65 40 Q70 40 70 45 L70 55 Q70 58 67 58 L48 58 Q45 58 45 55 Z"/>
         </svg>
       </div>
-      <h3>A voz dos seus direitos trabalhistas</h3>
+      <h3 data-split="words">A voz dos seus direitos trabalhistas</h3>
     </div>
   </div>
 </section>
@@ -488,7 +726,7 @@
 <section class="banner">
   <div class="wrap">
     <div class="banner-grid">
-      <div>
+      <div data-reveal="left">
         <div class="banner-eye">Advogada Trabalhista em Campinas e região</div>
         <h2>Te ajudo a resolver problemas com a empresa em que você trabalha ou já trabalhou</h2>
         <div class="banner-sub">Há mais de 15 anos defendendo trabalhadores como você</div>
@@ -499,7 +737,7 @@
           </a>
         </div>
       </div>
-      <div class="banner-art">
+      <div class="banner-art" data-reveal="right" data-delay="150" data-tilt data-tilt-max="5">
         <div class="banner-art-bg"></div>
         <!-- Balança + CV ilustrada -->
         <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -590,15 +828,108 @@
   </div>
 </section>
 
+<section class="diagnostic" id="diagnostico">
+  <div class="diagnostic-wrap" data-reveal="up">
+    <span class="diagnostic-eye">Diagnóstico rápido · sem custo</span>
+    <h2>Descubra em <em>30 segundos</em> se você tem direito.</h2>
+    <p class="lead">Três perguntas. Respostas personalizadas. Se tiver fundamento legal, mando a análise detalhada pelo WhatsApp — sem compromisso.</p>
+    <div class="quiz" id="quiz">
+      <div class="quiz-progress" aria-hidden="true"></div>
+
+      <div class="quiz-step active" data-step="1">
+        <div class="quiz-step-num">Pergunta 1 de 3</div>
+        <h3>O que aconteceu no seu caso?</h3>
+        <div class="quiz-opts">
+          <button class="quiz-opt" data-next="2" data-key="categoria" data-value="horas">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            Horas extras, banco de horas ou intervalo suprimido
+          </button>
+          <button class="quiz-opt" data-next="2" data-key="categoria" data-value="rescisao">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4m8-4v4M3 10h18"/></svg></span>
+            Demissão sem justa causa ou rescisão indireta
+          </button>
+          <button class="quiz-opt" data-next="2" data-key="categoria" data-value="assedio">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            Assédio moral, sexual ou humilhação no trabalho
+          </button>
+          <button class="quiz-opt" data-next="2" data-key="categoria" data-value="acidente">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+            Acidente de trabalho ou doença ocupacional
+          </button>
+          <button class="quiz-opt" data-next="2" data-key="categoria" data-value="inss">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            Aposentadoria, BPC ou benefício do INSS negado
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="2">
+        <button class="quiz-back" data-prev="1">← Voltar</button>
+        <div class="quiz-step-num">Pergunta 2 de 3</div>
+        <h3>Há quanto tempo isso aconteceu?</h3>
+        <div class="quiz-opts">
+          <button class="quiz-opt" data-next="3" data-key="tempo" data-value="recente">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Menos de 2 anos — prazo em dia
+          </button>
+          <button class="quiz-opt" data-next="3" data-key="tempo" data-value="medio">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Entre 2 e 5 anos — ainda pode ter direito
+          </button>
+          <button class="quiz-opt" data-next="3" data-key="tempo" data-value="antigo">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+            Mais de 5 anos — preciso analisar melhor
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-step" data-step="3">
+        <button class="quiz-back" data-prev="2">← Voltar</button>
+        <div class="quiz-step-num">Pergunta 3 de 3</div>
+        <h3>Qual o seu nível de urgência?</h3>
+        <div class="quiz-opts">
+          <button class="quiz-opt" data-next="result" data-key="urgencia" data-value="agora">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+            Urgente — preciso de orientação hoje
+          </button>
+          <button class="quiz-opt" data-next="result" data-key="urgencia" data-value="semana">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+            Nos próximos dias, sem pressa
+          </button>
+          <button class="quiz-opt" data-next="result" data-key="urgencia" data-value="estudo">
+            <span class="quiz-opt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+            Só quero entender se tenho direito
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-result" data-step="result">
+        <div class="quiz-result-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3>Provavelmente você <em>tem direito</em>.</h3>
+        </div>
+        <p id="quiz-result-text">Com base nas suas respostas, há fundamento legal para analisarmos seu caso. Envie uma mensagem e faço a análise detalhada sem compromisso.</p>
+        <div style="text-align:center">
+          <a id="quiz-result-cta" class="quiz-result-cta" href="https://wa.me/5519995550000" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.1 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.33 4.96L2 22l5.15-1.35c1.45.79 3.09 1.21 4.85 1.21 5.5 0 9.96-4.46 9.96-9.96S17.5 2.04 12 2.04z"/></svg>
+            Receber análise pelo WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section sand" id="direitos">
   <div class="wrap">
-    <div class="shead">
+    <div class="shead" data-reveal="up">
+      <div class="shead-flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.3L20 9.3l-5.2 4.4L16 20l-4-3.4-4 3.4 1.2-6.3L4 9.3l6.2-1z"/></svg></div>
       <span class="shead-eye">Direitos Trabalhistas</span>
       <h2>Seis áreas em que posso te <em>ajudar a recuperar</em>.</h2>
       <p>Se uma destas situações aconteceu com você nos últimos 5 anos, provavelmente tem direito de reclamar na Justiça do Trabalho — e posso analisar sem compromisso.</p>
     </div>
 
-    <div class="areas">
+    <div class="areas" data-reveal="fade" data-stagger=".area" data-stagger-step="110">
       <article class="area">
         <div class="area-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>Horas extras não pagas</h3>
@@ -671,7 +1002,7 @@
 <section class="section" id="sobre">
   <div class="wrap">
     <div class="about-grid">
-      <div class="about-photo">
+      <div class="about-photo" data-reveal="left" data-tilt data-tilt-max="3">
         <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
           <defs>
             <linearGradient id="hair2" x1="0" y1="0" x2="0" y2="1">
@@ -704,7 +1035,7 @@
         </svg>
       </div>
 
-      <div class="about-body">
+      <div class="about-body" data-reveal="right" data-delay="150">
         <span class="shead-eye" style="margin-bottom:0">Quem Sou</span>
         <h3>Uma advogada trabalhista que <em>fala a sua linguagem</em>.</h3>
         <p>Sou a Dra. Laura Benetti, advogada desde 2010, dedicada exclusivamente ao Direito do Trabalho e Previdenciário. Formada pela PUC-Campinas, pós-graduada em Direito do Trabalho pela FGV, membro da Associação dos Advogados Trabalhistas de Campinas.</p>
@@ -736,29 +1067,31 @@
 
 <section class="section dark">
   <div class="wrap">
-    <div class="shead">
+    <div class="shead" data-reveal="up">
+      <div class="shead-flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.3L20 9.3l-5.2 4.4L16 20l-4-3.4-4 3.4 1.2-6.3L4 9.3l6.2-1z"/></svg></div>
       <span class="shead-eye">Como funciona</span>
       <h2>Quatro passos para <em>recuperar seus direitos</em>.</h2>
       <p>Processo transparente, do primeiro contato ao depósito dos valores. Sem custo para analisar, sem pressão para contratar.</p>
     </div>
-    <div class="steps">
+    <div class="steps" data-timeline-progress data-reveal="fade" data-stagger=".step" data-stagger-step="150">
+      <div class="steps-progress" aria-hidden="true"></div>
       <div class="step">
-        <div class="step-num">i</div>
+        <div class="step-num" data-ring="100">i</div>
         <h4>Conte seu caso</h4>
         <p>Pelo WhatsApp ou formulário — em até 2h retorno com análise inicial.</p>
       </div>
       <div class="step">
-        <div class="step-num">ii</div>
+        <div class="step-num" data-ring="100">ii</div>
         <h4>Análise gratuita</h4>
         <p>Verifico documentos, calculo valores prováveis e explico os riscos.</p>
       </div>
       <div class="step">
-        <div class="step-num">iii</div>
+        <div class="step-num" data-ring="100">iii</div>
         <h4>Contrato claro</h4>
         <p>Honorários por êxito na maior parte dos casos, contrato assinado digitalmente.</p>
       </div>
       <div class="step">
-        <div class="step-num">iv</div>
+        <div class="step-num" data-ring="100">iv</div>
         <h4>Ação e recebimento</h4>
         <p>Você acompanha tudo por um painel exclusivo, até o dinheiro cair na sua conta.</p>
       </div>
@@ -766,15 +1099,39 @@
   </div>
 </section>
 
+<section class="case-month" aria-label="Caso recuperado">
+  <div class="case-month-wrap" data-reveal="up">
+    <div class="case-card">
+      <div class="case-seal">
+        Recuperado<span>Abril/26</span>
+      </div>
+      <div class="case-body">
+        <div class="case-label">Caso do mês</div>
+        <h3>Ação de horas extras — metalúrgico de Campinas</h3>
+        <p>6 anos fazendo jornada 12×36 sem receber adicional; acordo fechado em audiência única após 5 meses. Nome preservado por acordo de confidencialidade.</p>
+      </div>
+      <div class="case-amount" style="text-align:right">
+        <div style="font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Recebeu</div>
+        R$&nbsp;<span data-count="42800" data-count-prefix="" data-count-duration="2000">42.800</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.3L20 9.3l-5.2 4.4L16 20l-4-3.4-4 3.4 1.2-6.3L4 9.3l6.2-1z"/></svg>
+</div>
+
 <section class="section sand" id="depoimentos">
   <div class="wrap">
-    <div class="shead">
+    <div class="shead" data-reveal="up">
+      <div class="shead-flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.3L20 9.3l-5.2 4.4L16 20l-4-3.4-4 3.4 1.2-6.3L4 9.3l6.2-1z"/></svg></div>
       <span class="shead-eye">Depoimentos</span>
       <h2>O que dizem meus clientes <em>trabalhadores</em>.</h2>
       <p>Para mim é uma grande satisfação ajudar trabalhadores a terem seus direitos respeitados — avaliações reais publicadas no Google Meu Negócio.</p>
     </div>
 
-    <div class="testimonials-hero">
+    <div class="testimonials-hero" data-reveal="up" data-delay="120">
       <div class="trustpilot-card">
         <div class="trustpilot-excellent">Excelente</div>
         <div class="trustpilot-stars">
@@ -797,7 +1154,7 @@
         </div>
       </div>
 
-      <div class="gcards">
+      <div class="gcards" data-reveal="fade" data-stagger=".gcard" data-stagger-step="100">
         <div class="gcard">
           <div class="gcard-head">
             <div class="gcard-avatar av1">TR</div>
@@ -930,13 +1287,19 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="shead">
+    <div class="shead" data-reveal="up">
+      <div class="shead-flourish"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.3L20 9.3l-5.2 4.4L16 20l-4-3.4-4 3.4 1.2-6.3L4 9.3l6.2-1z"/></svg></div>
       <span class="shead-eye">Dúvidas Frequentes</span>
       <h2>As perguntas que <em>sempre recebo</em>.</h2>
       <p>Se a sua não estiver aqui, pode mandar diretamente pelo WhatsApp — respondo pessoalmente em até 2 horas úteis.</p>
     </div>
 
-    <div class="faq">
+    <div class="faq-search" data-reveal="up" data-delay="100">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="faq-q" type="text" placeholder="Procurar por palavra-chave (ex: prazo, FGTS, audiência)…" aria-label="Buscar nas perguntas frequentes" />
+    </div>
+
+    <div class="faq" data-reveal="fade" data-stagger=".q" data-stagger-step="70">
       <details class="q">
         <summary>A primeira consulta é realmente gratuita?</summary>
         <div class="q-body">Sim. A análise inicial do seu caso — por WhatsApp, telefone ou videoconferência — não tem custo. Serve para eu entender o que aconteceu, verificar documentos e dizer se há fundamento legal. Você só contrata se quiser avançar, com proposta de honorários formal antes de qualquer assinatura.</div>
@@ -965,12 +1328,16 @@
   </div>
 </section>
 
-<section class="cta-band">
+<section class="cta-band vs-gradient-follow">
+  <div class="cta-floaters" aria-hidden="true">
+    <span>Justiça</span>
+    <span>Direitos</span>
+  </div>
   <div class="wrap">
-    <div class="cta-inner">
+    <div class="cta-inner" data-reveal="up">
       <h2>Ainda em dúvida? Conta o seu caso <em>sem compromisso</em>.</h2>
       <p>Análise inicial gratuita. Você não paga nada para saber se tem direito — e só contrata se fizer sentido pra você.</p>
-      <a href="https://wa.me/5519995550000?text=Ol%C3%A1%2C%20Dra.%20Laura.%20Gostaria%20de%20analisar%20meu%20caso." class="hero-cta">
+      <a data-magnetic data-mag-strength="0.3" href="https://wa.me/5519995550000?text=Ol%C3%A1%2C%20Dra.%20Laura.%20Gostaria%20de%20analisar%20meu%20caso." class="hero-cta">
         <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.1 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.33 4.96L2 22l5.15-1.35c1.45.79 3.09 1.21 4.85 1.21 5.5 0 9.96-4.46 9.96-9.96S17.5 2.04 12 2.04z"/></svg>
         Agendar consulta gratuita
       </a>
@@ -981,7 +1348,7 @@
 <section class="section sand" id="contato">
   <div class="wrap">
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="contact-info" data-reveal="left">
         <span class="shead-eye" style="margin-bottom:0">Contato</span>
         <h3>Fale <em>diretamente comigo</em>.</h3>
         <p>Atendo pessoalmente cada primeiro contato — sem formulário que ninguém responde, sem call center, sem estagiário. Retorno em até 2 horas em dias úteis.</p>
@@ -1021,7 +1388,7 @@
         </ul>
       </div>
 
-      <form class="contact-form" onsubmit="event.preventDefault();window.location='https://wa.me/5519995550000?text='+encodeURIComponent('Olá, Dra. Laura. Meu nome é '+this.nome.value+'. Telefone: '+this.fone.value+'. Caso: '+this.caso.value+'. Resumo: '+this.msg.value);">
+      <form class="contact-form" data-reveal="right" onsubmit="event.preventDefault();window.location='https://wa.me/5519995550000?text='+encodeURIComponent('Olá, Dra. Laura. Meu nome é '+this.nome.value+'. Telefone: '+this.fone.value+'. Caso: '+this.caso.value+'. Resumo: '+this.msg.value);">
         <h4>Conte <em>seu caso</em>.</h4>
         <p>Preencha que retorno pessoalmente pelo WhatsApp em até 2 horas úteis — análise sem custo.</p>
         <div class="ff">
@@ -1125,6 +1492,93 @@
   <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.1 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.33 4.96L2 22l5.15-1.35c1.45.79 3.09 1.21 4.85 1.21 5.5 0 9.96-4.46 9.96-9.96S17.5 2.04 12 2.04z"/></svg>
   <span class="wa-fab-text">Fale comigo</span>
 </a>
+
+<script src="../../assets/common.js" defer></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- QUIZ INTERATIVO ---------- */
+  var quiz = document.getElementById('quiz');
+  if(quiz){
+    var state = {categoria:null, tempo:null, urgencia:null};
+    var steps = quiz.querySelectorAll('[data-step]');
+    var prog = quiz.querySelector('.quiz-progress');
+
+    function goTo(step){
+      steps.forEach(function(s){ s.classList.remove('active'); });
+      var target = quiz.querySelector('[data-step="'+step+'"]');
+      if(target) target.classList.add('active');
+      var pmap = {1:.33, 2:.66, 3:1, result:1};
+      if(prog) prog.style.setProperty('--qp', pmap[step]);
+      if(step === 'result') buildResult();
+    }
+
+    function buildResult(){
+      var cat = state.categoria, tempo = state.tempo, urg = state.urgencia;
+      var txt = 'Com base nas suas respostas, há fundamento legal para analisarmos seu caso.';
+      var catMap = {
+        horas: 'Horas extras dos últimos 5 anos podem ser recuperadas na Justiça do Trabalho, com juros e correção.',
+        rescisao: 'Rescisão indireta dá direito a todas as verbas da demissão sem justa causa — inclusive multa de 40% do FGTS.',
+        assedio: 'Assédio moral ou sexual pode render indenização por dano moral (R$ 5 mil a R$ 80 mil tipicamente) além de estabilidade.',
+        acidente: 'Acidente de trabalho dá estabilidade de 12 meses após alta + auxílio-acidente + indenização por danos.',
+        inss: 'Benefícios negados pelo INSS podem ser concedidos judicialmente com atrasados desde o requerimento.'
+      };
+      var tempoMap = {
+        recente: 'Seu caso está no prazo — podemos ajuizar quando quiser.',
+        medio: 'Ainda há prazo para a maior parte dos pedidos. Vamos confirmar.',
+        antigo: 'Precisamos verificar prescrição, mas há revisões e benefícios que admitem até 10 anos.'
+      };
+      var urgMap = {
+        agora: 'Prioridade total — te atendo hoje mesmo.',
+        semana: 'Agendo nos próximos dias conforme sua disponibilidade.',
+        estudo: 'Tranquilo — faço a análise sem compromisso e você decide depois.'
+      };
+      if(cat && catMap[cat]) txt = catMap[cat] + ' ' + (tempoMap[tempo] || '') + ' ' + (urgMap[urg] || '');
+      var out = document.getElementById('quiz-result-text');
+      if(out) out.textContent = txt;
+      var cta = document.getElementById('quiz-result-cta');
+      if(cta){
+        var msg = 'Olá, Dra. Laura. Fiz o diagnóstico do site (categoria: '+cat+', há: '+tempo+', urgência: '+urg+') e gostaria da análise do meu caso.';
+        cta.href = 'https://wa.me/5519995550000?text='+encodeURIComponent(msg);
+      }
+    }
+
+    quiz.addEventListener('click', function(e){
+      var opt = e.target.closest('.quiz-opt');
+      if(opt){
+        var key = opt.dataset.key, val = opt.dataset.value;
+        if(key) state[key] = val;
+        goTo(opt.dataset.next);
+        return;
+      }
+      var back = e.target.closest('.quiz-back');
+      if(back) goTo(back.dataset.prev);
+    });
+  }
+
+  /* ---------- FAQ SEARCH FILTER ---------- */
+  var faqInput = document.getElementById('faq-q');
+  if(faqInput){
+    faqInput.addEventListener('input', function(){
+      var q = faqInput.value.trim().toLowerCase();
+      document.querySelectorAll('.faq .q').forEach(function(el){
+        var text = el.textContent.toLowerCase();
+        el.classList.toggle('hidden', q && text.indexOf(q) === -1);
+      });
+    });
+  }
+
+  /* ---------- GRADIENT FOLLOW nos elementos CTA ---------- */
+  document.querySelectorAll('.vs-gradient-follow').forEach(function(el){
+    el.addEventListener('mousemove', function(e){
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      el.style.setProperty('--my', ((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

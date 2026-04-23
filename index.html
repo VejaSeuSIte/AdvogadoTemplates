@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/common.css" />
 <style>
   :root{
     --paper:#fbfaf7;
@@ -300,9 +301,81 @@
     .wa-fab{animation:none}
     .q-body{animation:none}
   }
+
+  /* =================================================================
+     UPGRADE 2026-04-23 — scroll progress, magnetic CTA, comparison,
+     floating TOC, easter eggs
+     ================================================================= */
+  :root{--vs-accent:var(--terra-500);--vs-accent-2:var(--gold)}
+
+  /* Floating TOC */
+  .vs-toc{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:12px;padding:16px 12px;background:rgba(251,250,247,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:100px;box-shadow:0 10px 30px rgba(45,21,9,.08);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s}
+  .vs-toc.visible{opacity:1;pointer-events:auto;transform:translateY(-50%) translateX(0)}
+  .vs-toc a{position:relative;width:10px;height:10px;border-radius:50%;background:var(--line-2);transition:all .3s;display:block}
+  .vs-toc a:hover{background:var(--terra-500);transform:scale(1.3)}
+  .vs-toc a.active{background:var(--terra-500);transform:scale(1.2)}
+  .vs-toc a::after{content:attr(data-label);position:absolute;right:22px;top:50%;transform:translateY(-50%) translateX(-10px);background:var(--ink);color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:all .25s}
+  .vs-toc a:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+  @media(max-width:960px){.vs-toc{display:none}}
+
+  /* Comparison slider antes/depois */
+  .section.compare{padding:112px 0;background:var(--paper)}
+  .compare-wrap{max-width:1040px;margin:0 auto;padding:0 32px}
+  .compare-head{text-align:center;margin-bottom:40px}
+  .compare-head .eye{display:inline-block;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-500);font-weight:600;margin-bottom:14px;padding:5px 14px;background:rgba(155,90,62,.08);border-radius:100px}
+  .compare-head h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,46px);font-weight:600;color:var(--ink);line-height:1.1;margin-bottom:14px;letter-spacing:-.015em}
+  .compare-head h2 em{font-style:italic;color:var(--terra-500)}
+  .compare-head p{font-size:16px;color:var(--gray);max-width:54ch;margin:0 auto;line-height:1.65}
+  .compare{position:relative;aspect-ratio:16/10;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px rgba(45,21,9,.15);border:1px solid var(--line);user-select:none;cursor:ew-resize;background:#fff}
+  .compare-before,.compare-after{position:absolute;inset:0;display:grid;place-items:center;padding:32px}
+  .compare-before{background:linear-gradient(135deg,#e8e8ea,#d5d5d8);clip-path:inset(0 calc(100% - var(--split,50%)) 0 0)}
+  .compare-after{background:linear-gradient(135deg,var(--paper-2),var(--sand));clip-path:inset(0 0 0 var(--split,50%))}
+  .compare-label{position:absolute;top:20px;padding:6px 14px;background:#fff;border:1px solid var(--line);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .compare-before .compare-label{left:20px;color:#6b6b70}
+  .compare-after .compare-label{right:20px;color:var(--terra-500)}
+  .compare-mock{width:min(85%,620px);aspect-ratio:16/10;border-radius:10px;background:#fff;padding:18px;display:flex;flex-direction:column;gap:10px;font-size:11px;color:#555;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+  .compare-mock.bad{font-family:Arial,sans-serif;background:#f5f5f5}
+  .compare-mock.bad .mock-h{height:14px;width:60%;background:#c0c0c0;border-radius:2px;margin-bottom:4px}
+  .compare-mock.bad .mock-p{height:8px;width:90%;background:#d8d8d8;border-radius:2px}
+  .compare-mock.bad .mock-p:nth-child(3){width:70%}
+  .compare-mock.bad .mock-btn{align-self:flex-start;height:28px;width:100px;background:#5a6fb1;border-radius:2px;margin-top:8px}
+  .compare-mock.bad .mock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px}
+  .compare-mock.bad .mock-grid>div{height:50px;background:#ddd;border-radius:2px}
+  .compare-mock.good{font-family:'Playfair Display',serif;background:var(--paper);padding:20px}
+  .compare-mock.good .mock-kicker{height:8px;width:30%;background:var(--terra-500);border-radius:4px;opacity:.7}
+  .compare-mock.good .mock-h{height:20px;width:75%;background:var(--ink);border-radius:3px;margin:6px 0 4px;font-family:'Playfair Display',serif}
+  .compare-mock.good .mock-p{height:8px;width:95%;background:var(--gray);border-radius:3px;opacity:.5}
+  .compare-mock.good .mock-p:nth-child(4){width:70%}
+  .compare-mock.good .mock-btn{align-self:flex-start;height:32px;width:120px;background:var(--green);border-radius:100px;margin-top:12px;box-shadow:0 6px 16px rgba(37,211,102,.35)}
+  .compare-mock.good .mock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+  .compare-mock.good .mock-grid>div{height:58px;background:linear-gradient(135deg,var(--paper-2),var(--sand));border-radius:8px;border:1px solid var(--line)}
+  .compare-handle{position:absolute;top:0;bottom:0;left:var(--split,50%);transform:translateX(-50%);width:3px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.4);z-index:3;pointer-events:none}
+  .compare-handle::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--terra-500);box-shadow:0 6px 20px rgba(155,90,62,.4);display:grid;place-items:center}
+  .compare-handle::after{content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-weight:700;font-size:18px;z-index:2}
+  .compare-range{position:absolute;inset:0;width:100%;opacity:0;z-index:4;cursor:ew-resize;margin:0}
+  .compare-hint{text-align:center;margin-top:18px;font-size:13px;color:var(--muted);font-style:italic}
+
+  /* Odômetro digit-feel */
+  .odo{display:inline-flex;overflow:hidden;vertical-align:baseline}
+  .odo-digit{display:inline-block;line-height:1}
+
+  /* Magnetic effect transition */
+  [data-magnetic]{transition:transform .25s cubic-bezier(.22,.8,.24,1);will-change:transform}
+
 </style>
 </head>
-<body>
+<body data-scroll-progress>
+
+<!-- FLOATING TABLE OF CONTENTS -->
+<nav class="vs-toc" id="vs-toc" aria-label="Navegação rápida">
+  <a href="#por-que" data-label="Por que"></a>
+  <a href="#exemplos" data-label="Exemplos"></a>
+  <a href="#personalizacao" data-label="Personalização"></a>
+  <a href="#incluido" data-label="Incluído"></a>
+  <a href="#antes-depois" data-label="Antes e depois"></a>
+  <a href="#como" data-label="Como funciona"></a>
+  <a href="#faq" data-label="FAQ"></a>
+</nav>
 
 <!-- NAVIGATION -->
 <nav class="nav">
@@ -336,7 +409,7 @@
         <h1>Seu escritório, <em>elegante</em> em qualquer tela.</h1>
         <p class="hero-sub">Criamos o site profissional da sua advocacia — personalizado à sua marca, ao seu nicho e ao seu gosto. Entrega em 7 a 15 dias.</p>
         <div class="hero-actions">
-          <a href="https://wa.me/5581993858453?text=Ol%C3%A1!%20Tenho%20interesse%20em%20um%20site%20para%20advocacia." class="btn btn-wa">
+          <a data-magnetic data-mag-strength="0.28" href="https://wa.me/5581993858453?text=Ol%C3%A1!%20Tenho%20interesse%20em%20um%20site%20para%20advocacia." class="btn btn-wa">
             <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.88 1.22 3.08.15.2 2.1 3.21 5.1 4.5.71.31 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35z"/><path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.33 4.96L2 22l5.15-1.35c1.45.79 3.09 1.21 4.85 1.21 5.5 0 9.96-4.46 9.96-9.96S17.5 2.04 12 2.04z"/></svg>
             Conversar no WhatsApp
           </a>
@@ -646,7 +719,7 @@
 </section>
 
 <!-- PERSONALIZAÇÃO -->
-<section class="section sand">
+<section class="section sand" id="personalizacao">
   <div class="wrap">
     <div class="shead">
       <span class="shead-eye">100% personalizado</span>
@@ -695,7 +768,7 @@
 </section>
 
 <!-- ESTÁ INCLUÍDO -->
-<section class="section">
+<section class="section" id="incluido">
   <div class="wrap">
     <div class="shead">
       <span class="shead-eye">Está tudo incluído</span>
@@ -752,6 +825,43 @@
         <p class="included-desc">Pequenos ajustes e correções nos primeiros 30 dias, sem custo.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- COMPARAÇÃO ANTES / DEPOIS -->
+<section class="section compare" id="antes-depois">
+  <div class="compare-wrap">
+    <div class="compare-head">
+      <span class="eye">Site genérico vs. site bem feito</span>
+      <h2>A diferença entre <em>passar batido</em> e <em>virar escolha</em>.</h2>
+      <p>Arraste a barra e compare. À esquerda, um site em builder pronto — o que 90% dos advogados têm. À direita, o que entrego: tipografia, hierarquia, voz, confiança.</p>
+    </div>
+    <div class="compare" id="compare">
+      <div class="compare-before">
+        <span class="compare-label">Site genérico</span>
+        <div class="compare-mock bad">
+          <div class="mock-h"></div>
+          <div class="mock-p"></div>
+          <div class="mock-p"></div>
+          <div class="mock-btn"></div>
+          <div class="mock-grid"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+      <div class="compare-after">
+        <span class="compare-label">Seu site aqui</span>
+        <div class="compare-mock good">
+          <div class="mock-kicker"></div>
+          <div class="mock-h"></div>
+          <div class="mock-p"></div>
+          <div class="mock-p"></div>
+          <div class="mock-btn"></div>
+          <div class="mock-grid"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+      <div class="compare-handle" aria-hidden="true"></div>
+      <input type="range" class="compare-range" min="0" max="100" value="50" aria-label="Arraste para comparar" />
+    </div>
+    <p class="compare-hint">Arraste a bolinha pra ver a diferença · toque e segure no celular</p>
   </div>
 </section>
 
@@ -970,8 +1080,71 @@
       window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
+
+  // 7. COMPARE SLIDER
+  var compare = document.getElementById('compare');
+  if (compare) {
+    var range = compare.querySelector('.compare-range');
+    function setSplit(v){ compare.style.setProperty('--split', v + '%'); }
+    range.addEventListener('input', function(){ setSplit(range.value); });
+    // Support touch/drag directly on element
+    function positionFromEvent(e){
+      var r = compare.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      return Math.max(0, Math.min(100, (x / r.width) * 100));
+    }
+    var dragging = false;
+    compare.addEventListener('mousedown', function(e){ dragging = true; setSplit(positionFromEvent(e)); });
+    window.addEventListener('mouseup', function(){ dragging = false; });
+    window.addEventListener('mousemove', function(e){ if(dragging) setSplit(positionFromEvent(e)); });
+    compare.addEventListener('touchstart', function(e){ setSplit(positionFromEvent(e)); }, {passive:true});
+    compare.addEventListener('touchmove', function(e){ setSplit(positionFromEvent(e)); }, {passive:true});
+    // Auto-demo on view
+    if ('IntersectionObserver' in window) {
+      var dio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          var start = performance.now(), dur = 1800;
+          function step(now){
+            var p = Math.min(1, (now-start)/dur);
+            var v = 50 + Math.sin(p*Math.PI*2)*20;
+            setSplit(v);
+            if (p < 1) requestAnimationFrame(step);
+            else setSplit(50);
+          }
+          requestAnimationFrame(step);
+          dio.unobserve(compare);
+        });
+      }, { threshold: 0.5 });
+      dio.observe(compare);
+    }
+  }
+
+  // 8. FLOATING TOC scrollspy
+  var toc = document.getElementById('vs-toc');
+  if (toc) {
+    var tocLinks = toc.querySelectorAll('a');
+    var sections = Array.from(tocLinks).map(function(a){
+      return { link: a, section: document.querySelector(a.getAttribute('href')) };
+    }).filter(function(s){ return s.section; });
+    function tocUpdate(){
+      if (window.scrollY > 600) toc.classList.add('visible');
+      else toc.classList.remove('visible');
+      var vh = window.innerHeight;
+      var activeIdx = -1;
+      sections.forEach(function(s, i){
+        var r = s.section.getBoundingClientRect();
+        if (r.top < vh*.4) activeIdx = i;
+      });
+      tocLinks.forEach(function(a, i){ a.classList.toggle('active', i === activeIdx); });
+    }
+    window.addEventListener('scroll', tocUpdate, { passive: true });
+    tocUpdate();
+  }
 })();
 </script>
+
+<script src="assets/common.js" defer></script>
 
 </body>
 </html>
