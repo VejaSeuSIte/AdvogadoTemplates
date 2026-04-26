@@ -51,12 +51,16 @@
         var delay = parseInt(el.dataset.delay||'0',10);
         setTimeout(function(){
           el.setAttribute('data-in','');
-          // stagger
+          // stagger (prefixa :scope se selector começa com > pra ser válido em querySelectorAll)
           if(el.dataset.stagger){
             var step = parseInt(el.dataset.staggerStep||'90',10);
-            el.querySelectorAll(el.dataset.stagger).forEach(function(c,i){
-              setTimeout(function(){ c.setAttribute('data-in',''); }, i*step);
-            });
+            var sel = el.dataset.stagger.trim();
+            if(sel[0] === '>') sel = ':scope ' + sel;
+            try {
+              el.querySelectorAll(sel).forEach(function(c,i){
+                setTimeout(function(){ c.setAttribute('data-in',''); }, i*step);
+              });
+            } catch(_){ /* selector inválido */ }
           }
         }, delay);
         io.unobserve(el);
